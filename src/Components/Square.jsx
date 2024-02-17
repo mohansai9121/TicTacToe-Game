@@ -1,5 +1,6 @@
 import './Styles.scss'
 
+// eslint-disable-next-line react/prop-types
 const Square = ({value}) => {
   return (
     <div>
