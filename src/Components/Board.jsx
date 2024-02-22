@@ -2,14 +2,13 @@ import Square from "./Square"
 import { useState } from "react"
 import './Styles.scss'
 import { checkWinner } from "./winner"
+import StatusMsg from "./StatusMsg"
 
 const Board = () => {
   let [squares, setSquares] = useState(Array(9).fill(null))
   let [isX, setIsX] = useState(true)
-  let player = isX?'X':'O'
   let winnerIs = checkWinner(squares)
-  let status = winnerIs?`Winner is ${winnerIs}`:`Now, its ${player} turn`
-  //console.log(squares)
+  
   const squareHandler = (position)=>{
     if(squares[position] || winnerIs){
       return;
@@ -35,7 +34,7 @@ const Board = () => {
     <div className="board">
       <div>
         <h2>Tic Tac Toe</h2>
-        <h3>{status}</h3>
+        <StatusMsg winner={winnerIs} squares={squares} nextPlayer={isX} />
       </div>
       <div className="board-row">
         {renderSquares(0)}
