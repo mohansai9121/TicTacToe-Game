@@ -47,7 +47,7 @@ const Board = () => {
   return (
     <div className="board">
       <div>
-        <h2>Tic Tac Toe</h2>
+        <h2><span style={{color:'orange'}}>Tic </span><span style={{color:'green'}}>Tac </span><span style={{color:'orange'}}>Toe</span></h2>
         <StatusMsg winner={winnerIs} squares={squares} nextPlayer={isX} />
       </div>
       <div className="board-row">
@@ -67,6 +67,8 @@ const Board = () => {
       </div><br></br>
       <button onClick={newGame} className={`newGame ${winnerIs? 'active':''}`}>New game</button>
       <History moves={move}/>
+      <br></br>
+      <h6 style={{color:'#ffcf00'}}>Game designed by Mohan Sai</h6>
     </div>
   )
 }
