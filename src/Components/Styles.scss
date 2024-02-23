@@ -23,3 +23,11 @@
 .greeno{
     color: green;
 }
+.newGame{
+    &.active{
+        background-color: orange;
+    }
+}
+.startGame{
+    color: #ff00ff;
+}

@@ -4,13 +4,13 @@ const StatusMsg = ({ winner, squares, nextPlayer}) => {
     let player = nextPlayer?'X':'O'
     const statusMsg = ()=>{
         if(winner){
-            return <div>Winner is <span className={winner==='o'?'redx':'greeno'}>{winner}</span></div>
+            return <div>Winner is <span className={winner==='X'?'redx':'greeno'}>{winner}</span></div>
         }
         if(!winner && squaresFull){
             return <div>Game Draw</div>
         }
         if(!winner && !squaresFull)
-          return <div>Next is<span className={player?'redx':'greeno'}> {player}</span> turn</div>
+          return <div>Next is<span className={nextPlayer?'redx':'greeno'}> {player}</span> turn</div>
         return null
     }
   return (

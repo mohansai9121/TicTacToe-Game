@@ -4,7 +4,7 @@ import './Styles.scss'
 const Square = ({value, onClick}) => {
   return (
     <div>
-        <button className="square" onClick={onClick}>{value}</button>
+        <button className="square" onClick={onClick}><span className={(value==='X')?'redx':'greeno'}>{value}</span></button>
     </div>
   )
 }

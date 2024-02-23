@@ -3,33 +3,47 @@ import { useState } from "react"
 import './Styles.scss'
 import { checkWinner } from "./winner"
 import StatusMsg from "./StatusMsg"
-
+import History from "./History"
+const newBoard = [{squares:Array(9).fill(null), isX:true}]
 const Board = () => {
-  let [squares, setSquares] = useState(Array(9).fill(null))
-  let [isX, setIsX] = useState(true)
+  let [history, setHistory] = useState(newBoard)
+  //let [squares, setSquares] = useState(Array(9).fill(null))
+  //let [isX, setIsX] = useState(true)
+  let [move, setMove] = useState(0)
+  let {squares, isX} = history[move]
   let winnerIs = checkWinner(squares)
   
   const squareHandler = (position)=>{
-    if(squares[position] || winnerIs){
+    var currentMove = history[history.length-1]
+    if(currentMove.squares[position] || winnerIs){
       return;
     }
-    setSquares((gameSquares)=>{
-      return gameSquares.map((squareValue, p)=>{
+    setHistory((currentHistory)=>{
+      let currentMove = currentHistory[currentHistory.length-1]
+      const nextSquares = currentMove.squares.map((squareValue, p)=>{
         if(position === p){
           return isX? 'X': 'O'
         }
         return squareValue
       })
+      return currentHistory.concat({
+        squares: nextSquares,
+        isX:!currentMove.isX
+      })
     })
-    setIsX((valueX)=>!valueX)
+    setMove(move=>move+1)
   }
-
+  console.log(history)
   const renderSquares = (pos)=>{
     return <Square value={squares[pos]} onClick={()=>{
       squareHandler(pos)
     }}/>
   }
-
+  const newGame = ()=>{
+    setHistory(newBoard)
+    setMove(0)
+  }
+  
   return (
     <div className="board">
       <div>
@@ -50,7 +64,9 @@ const Board = () => {
         {renderSquares(6)}
         {renderSquares(7)}
         {renderSquares(8)}
-      </div>
+      </div><br></br>
+      <button onClick={newGame} className={`newGame ${winnerIs? 'active':''}`}>New game</button>
+      <History moves={move}/>
     </div>
   )
 }
